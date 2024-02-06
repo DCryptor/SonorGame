@@ -10,6 +10,10 @@ TagManager:
   - wall
   - GameManager
   - rabbyt
+  - wolf
+  - point1
+  - point2
+  - point3
   layers:
   - Default
   - TransparentFX
