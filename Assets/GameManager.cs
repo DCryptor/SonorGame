@@ -27,13 +27,15 @@ public class GameManager : MonoBehaviour
     public int RabbytPoint;
     public int RabbytWinPoint;
     public Text rabbyt_score;
-    public Text rabbyt_win;
+    //public Text rabbyt_win;
     public bool Wolf_Step_True = false;
     public bool Rabbyt_Step_True = true;
-    public int rabbyt_max_step = 5;
+    //public int rabbyt_max_step = 5;
     public int rabbyt_step;
     public int wolf_step;
 
+    public Text WolfStepText;
+    public Text RabbytStepText;
     public GameObject retry_btn;
     // Start is called before the first frame update
     void Start()
@@ -65,7 +67,7 @@ public class GameManager : MonoBehaviour
         }
 
         rabbyt_score.text = "" + RabbytPoint;
-        rabbyt_win.text = "" + RabbytWinPoint;
+        //rabbyt_win.text = "" + RabbytWinPoint;
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
@@ -127,6 +129,8 @@ public class GameManager : MonoBehaviour
                 selected_wolf.transform.rotation = Quaternion.Slerp(selected_wolf.transform.rotation, rot, 10 * Time.deltaTime);
             }
         }
+
+        YouStep();
     }
     public void CreateStepObjRabbyt()
     {
@@ -199,6 +203,26 @@ public class GameManager : MonoBehaviour
         if (rabbyts.Count == 0)
         {
             retry_btn.SetActive(true);
+        }
+    }
+
+    public void YouStep()
+    {
+        if (Rabbyt_Step_True)
+        {
+            RabbytStepText.gameObject.SetActive(true);
+        }
+        else
+        {
+            RabbytStepText.gameObject.SetActive(false);
+        }
+        if (Wolf_Step_True)
+        {
+            WolfStepText.gameObject.SetActive(true);
+        }
+        else
+        {
+            WolfStepText.gameObject.SetActive(false);
         }
     }
 }

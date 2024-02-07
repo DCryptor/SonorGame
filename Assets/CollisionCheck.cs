@@ -6,11 +6,12 @@ using UnityEngine;
 public class CollisionCheck : MonoBehaviour
 {
     GameManager gameManager;
-    Color color;
+    SpriteRenderer sprite;
     void Start()
     {
+        sprite = GetComponentInChildren<SpriteRenderer>();
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
-        color = GetComponent<Renderer>().material.color = Color.green;
+        sprite.color = Color.green;
     }
 
     // Update is called once per frame
@@ -23,8 +24,8 @@ public class CollisionCheck : MonoBehaviour
     {
         if (other.CompareTag("wall"))
         {
+            sprite.color = Color.red;
             gameManager.collision_wall = true;
-            color = GetComponent<Renderer>().material.color = Color.red;
             Debug.Log("Collision!");
         }
 
@@ -32,8 +33,8 @@ public class CollisionCheck : MonoBehaviour
         {
             if (other.transform.name != transform.parent.name)
             {
+                sprite.color = Color.red;
                 gameManager.collision_wall = true;
-                color = GetComponent<Renderer>().material.color = Color.red;
                 Debug.Log("Collision!" + transform.parent.name);
             }
         }
@@ -42,15 +43,15 @@ public class CollisionCheck : MonoBehaviour
     {
         if (other.CompareTag("wall"))
         {
+            sprite.color = Color.green;
             gameManager.collision_wall = false;
-            color = GetComponent<Renderer>().material.color = Color.green;
             Debug.Log("Collision Exit!");
         }
 
         if (other.CompareTag("rabbyt"))
         {
+            sprite.color = Color.green;
             gameManager.collision_wall = false;
-            color = GetComponent<Renderer>().material.color = Color.green;
             Debug.Log("Collision Exit!");
         }
     }

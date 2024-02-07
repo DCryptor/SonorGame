@@ -6,13 +6,14 @@ using UnityEngine;
 public class CollisionCheckWolf : MonoBehaviour
 {
     GameManager gameManager;
-    Color color;
+    SpriteRenderer sprite;
 
     public bool isStepped = false;
     void Start()
     {
+        sprite = GetComponentInChildren<SpriteRenderer>();
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
-        color = GetComponent<Renderer>().material.color = Color.green;
+        sprite.color = Color.green;
     }
 
     // Update is called once per frame
@@ -26,7 +27,7 @@ public class CollisionCheckWolf : MonoBehaviour
         if (other.CompareTag("wall"))
         {
             gameManager.collision_wall = true;
-            color = GetComponent<Renderer>().material.color = Color.red;
+            sprite.color = Color.red;
             Debug.Log("Collision!");
         }
     }
@@ -35,7 +36,7 @@ public class CollisionCheckWolf : MonoBehaviour
         if (other.CompareTag("wall"))
         {
             gameManager.collision_wall = false;
-            color = GetComponent<Renderer>().material.color = Color.green;
+            sprite.color = Color.green;
             Debug.Log("Collision Exit!");
         }
     }

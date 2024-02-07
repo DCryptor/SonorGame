@@ -30,7 +30,7 @@ public class rabbyt_points : MonoBehaviour
         {
             point_3 = true;
             gameManager.RabbytPoint = gameManager.RabbytPoint + 1;
-            gameManager.RabbytWinPoint = gameManager.RabbytWinPoint + 1;
+            //gameManager.RabbytWinPoint = gameManager.RabbytWinPoint + 1;
             if (gameManager.rabbyts.Contains(this.gameObject))
             {
                 // Удаляем объект из списка
@@ -42,6 +42,10 @@ public class rabbyt_points : MonoBehaviour
                 // Присваиваем новый массив к старой переменной
                 gameManager.rabbyts = new List<GameObject>(newObjectsArray);
                 Destroy(this.gameObject);
+                if (gameManager.rabbyt_step > 0)
+                {
+                    gameManager.rabbyt_step = gameManager.rabbyt_step - 1;
+                }
             }
         }
     }

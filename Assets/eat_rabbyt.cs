@@ -23,16 +23,24 @@ public class eat_rabbyt : MonoBehaviour
         {
             if (gameManager.rabbyts.Contains(other.gameObject))
             {
-                // Удаляем объект из списка
-                gameManager.rabbyts.Remove(other.gameObject);
-                Debug.Log("Объект удален из списка");
+                if (gameManager.Rabbyt_Step_True == true && gameManager.Wolf_Step_True == false)
+                {
+                    // Удаляем объект из списка
+                    gameManager.rabbyts.Remove(other.gameObject);
+                    Debug.Log("Объект удален из списка");
 
-                // Преобразуем список в массив
-                GameObject[] newObjectsArray = gameManager.rabbyts.ToArray();
-                // Присваиваем новый массив к старой переменной
-                gameManager.rabbyts = new List<GameObject>(newObjectsArray);
-                Destroy(other.gameObject);
-                score_value = score_value + 1;
+                    // Преобразуем список в массив
+                    GameObject[] newObjectsArray = gameManager.rabbyts.ToArray();
+                    // Присваиваем новый массив к старой переменной
+                    gameManager.rabbyts = new List<GameObject>(newObjectsArray);
+                    Destroy(other.gameObject);
+                    score_value = score_value + 1;
+
+                    if (gameManager.rabbyt_step > 0)
+                    {
+                        gameManager.rabbyt_step = gameManager.rabbyt_step - 1;
+                    }
+                }
             }
         }
     }
