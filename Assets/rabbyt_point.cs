@@ -20,11 +20,15 @@ public class rabbyt_points : MonoBehaviour
         {
             point_1 = true;
             gameManager.RabbytPoint = gameManager.RabbytPoint + 1;
+            GameObject fx_plus_obj = GameObject.Instantiate(gameManager.fx_plus, new Vector3(transform.position.x, transform.position.y + 3f, transform.position.z), Quaternion.identity);
+            Destroy(fx_plus_obj, 2f);
         }
         if (other.CompareTag("point2") && !point_2)
         {
             point_2 = true;
             gameManager.RabbytPoint = gameManager.RabbytPoint + 1;
+            GameObject fx_plus_obj = GameObject.Instantiate(gameManager.fx_plus, new Vector3(transform.position.x, transform.position.y + 3f, transform.position.z), Quaternion.identity);
+            Destroy(fx_plus_obj, 2f);
         }
         if (other.CompareTag("point3") && !point_3)
         {
@@ -41,6 +45,8 @@ public class rabbyt_points : MonoBehaviour
                 GameObject[] newObjectsArray = gameManager.rabbyts.ToArray();
                 // Присваиваем новый массив к старой переменной
                 gameManager.rabbyts = new List<GameObject>(newObjectsArray);
+                GameObject fx_plus_obj = GameObject.Instantiate(gameManager.fx_plus, new Vector3(transform.position.x, transform.position.y + 3f, transform.position.z), Quaternion.identity);
+                Destroy(fx_plus_obj, 2f);
                 Destroy(this.gameObject);
                 if (gameManager.rabbyt_step > 0)
                 {

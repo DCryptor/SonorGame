@@ -8,6 +8,9 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject fx_death, fx_impact, fx_plus;
+    public Camera rabbyt_camera;
+    public Camera wolf_camera;
     private VariableJoystick joystick_rabbyt;
     private VariableJoystick joystick_wolf;
     private Vector3 direction_rabbyt;
@@ -57,6 +60,7 @@ public class GameManager : MonoBehaviour
             for (int i = 0; i < rabbyts.Count; i++)
             {
                 rabbyts[i].GetComponent<rabbyt_points>().isStepped = false;
+                rabbyts[i].GetComponentInChildren<Outline>().enabled = false;
             }
         }
         if (wolf_step == 1)
@@ -112,7 +116,7 @@ public class GameManager : MonoBehaviour
         direction_wolf.x = joystick_wolf.Horizontal;
 
 
-        if (selected_rabbyt)
+        if (selected_rabbyt && Rabbyt_Step_True && !selected_rabbyt.GetComponent<rabbyt_points>().isStepped)
         {
             if (direction_rabbyt.magnitude != 0.0f)
             {
@@ -121,7 +125,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if (selected_wolf)
+        if (selected_wolf && Wolf_Step_True)
         {
             if (direction_wolf.magnitude != 0.0f)
             {
@@ -153,8 +157,9 @@ public class GameManager : MonoBehaviour
 
     public void StepRabbyt()
     {
-        if (isWork && !collision_wall)
+        if (isWork && !collision_wall && Rabbyt_Step_True)
         {
+            selected_rabbyt.GetComponentInChildren<Outline>().enabled = true;
             selected_rabbyt.transform.position = step_obj_rabbyt.transform.position;
             Destroy(step_obj_rabbyt);
             isWork = false;
@@ -184,7 +189,7 @@ public class GameManager : MonoBehaviour
 
     public void StepWolf()
     {
-        if (isWork && !collision_wall)
+        if (isWork && !collision_wall && Wolf_Step_True)
         {
             selected_wolf.transform.position = step_obj_wolf.transform.position;
             Destroy(step_obj_wolf.gameObject);
@@ -211,18 +216,22 @@ public class GameManager : MonoBehaviour
         if (Rabbyt_Step_True)
         {
             RabbytStepText.gameObject.SetActive(true);
+            rabbyt_camera.gameObject.SetActive(true);
         }
         else
         {
             RabbytStepText.gameObject.SetActive(false);
+            rabbyt_camera.gameObject.SetActive(false);
         }
         if (Wolf_Step_True)
         {
             WolfStepText.gameObject.SetActive(true);
+            wolf_camera.gameObject.SetActive(true);
         }
         else
         {
             WolfStepText.gameObject.SetActive(false);
+            wolf_camera.gameObject.SetActive(false);
         }
     }
 }
