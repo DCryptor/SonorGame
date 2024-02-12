@@ -40,11 +40,13 @@ public class GameManager : MonoBehaviour
     public Text WolfStepText;
     public Text RabbytStepText;
     public GameObject retry_btn;
-    // Start is called before the first frame update
+    private AudioSource audioSource;
+    public AudioClip sound_step, select;    // Start is called before the first frame update
     void Start()
     {
         joystick_rabbyt = GameObject.FindWithTag("joystick_rabbyt").GetComponent<VariableJoystick>();
         joystick_wolf = GameObject.FindWithTag("joystick_wolf").GetComponent<VariableJoystick>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -159,6 +161,7 @@ public class GameManager : MonoBehaviour
     {
         if (isWork && !collision_wall && Rabbyt_Step_True)
         {
+            audioSource.PlayOneShot(sound_step);
             selected_rabbyt.GetComponentInChildren<Outline>().enabled = true;
             selected_rabbyt.transform.position = step_obj_rabbyt.transform.position;
             Destroy(step_obj_rabbyt);
@@ -191,6 +194,7 @@ public class GameManager : MonoBehaviour
     {
         if (isWork && !collision_wall && Wolf_Step_True)
         {
+            audioSource.PlayOneShot(sound_step);
             selected_wolf.transform.position = step_obj_wolf.transform.position;
             Destroy(step_obj_wolf.gameObject);
             isWork = false;
